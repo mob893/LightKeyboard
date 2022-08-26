@@ -39,7 +39,7 @@ searchBox.addEventListener('keydown', e => {
 // /TEST
 
 //KEY
-let fontPixel   = 16;
+let fontPixel   = 10;
 let keySide     = 4 * fontPixel;
 let keyOnColor  = '#00FCFF';
 let keyOffColor = 'rgb(0, 0, 0)';

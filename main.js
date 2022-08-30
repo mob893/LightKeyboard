@@ -59,7 +59,7 @@ for (var i=0; i < htmlKey.length; i++) {
     key[keyType].self = htmlKey[i];
     key[keyType].x = parseInt(htmlKey[i].style.left) * fontPixel + keyBoard.x + htmlKey[i].clientWidth/2;
     key[keyType].y = parseInt(htmlKey[i].style.top ) * fontPixel + keyBoard.y + htmlKey[i].clientHeight/2;
-    
+    key[keyType].timeOutId = 0;
 };
 //console.log(key);
 
@@ -124,20 +124,21 @@ function waveHandle() {
 //Creating Wave & Key Effect
 window.addEventListener('keydown', e => {
     //console.log(e.code);
+        clearTimeout(key[e.code].timeOutId);
         key[e.code].self.style.backgroundColor = keyOnColor;
         key[e.code].self.style.boxShadow = `0 0 18px 0 ${keyOnColor}`;
         waveArray.push(new Wave(key[e.code].x, key[e.code].y));
         waveArray.push(new Wave(key[e.code].x, key[e.code].y, -10, 0.9));
-        setTimeout(function () {
+        key[e.code].timeOutId = setTimeout(function () {
             key[e.code].self.style.backgroundColor = keyOffColor;
             key[e.code].self.style.boxShadow = '';        
-        }, 300)
+        }, 500)
     // waveArray.push(new Wave(100, 100));
     //console.log(waveArray);
 })
 window.addEventListener('keyup', e => {
-    // key[e.code].self.style.backgroundColor = keyOffColor;
-    // key[e.code].self.style.boxShadow = '';
+    key[e.code].self.style.backgroundColor = keyOffColor;
+    key[e.code].self.style.boxShadow = '';
 
     //RAINBOW ACTIVATING
     cheat += e.key.toLowerCase();
